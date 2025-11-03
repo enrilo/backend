@@ -1,5 +1,6 @@
 // @ts-check
 import express from "express";
+import authenticateToken from "../middlewares/auth.js";
 import { userLoginController } from "../controllers/user/userLoginController.js";
 import { createUserController } from "../controllers/user/createUserController.js";
 import { getUsersController } from "../controllers/user/getUsersController.js";
@@ -11,7 +12,7 @@ const userRoutes = express.Router();
 
 userRoutes.post("/login", userLoginController);
 
-userRoutes.post("/", createUserController);
+userRoutes.post("/", authenticateToken, createUserController);
 
 userRoutes.get("/", getUsersController);
 
